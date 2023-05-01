@@ -1,24 +1,34 @@
 {
-    // IntelliSense を使用して利用可能な属性を学べます。
-    // 既存の属性の説明をホバーして表示します。
-    // 詳細情報は次を確認してください: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": [
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "デバッガ上でsample.pyを起動",
+      "type": "python",
+      "request": "launch",
+      "program": "sample.py",
+      // vscodeのterminal上でデバッガ＋プログラムを起動する。stdoutもterminalに出る。
+      "console": "integratedTerminal",
+      // 自分のソースコードだけをデバッガ上で実行。ライブラリ部分は無視
+      "justMyCode": true
+    },
+    {
+      // ptvsdはVisual Studio 向けのデバッグサーバ
+      "name": "ptvsd上で起動中のPythonアプリのポートにattach",
+      "type": "python",
+      "request": "attach",
+      "connect": {
+        // 別マシンで動いてるPythonアプリでもいける
+        "host": "localhost",
+        "port": 5678
+      },
+      "pathMappings": [
         {
-            "name": "Python: Remote Attach",
-            "type": "python",
-            "request": "attach",
-            "connect": {
-                "host": "localhost",
-                "port": 5678
-            },
-            "pathMappings": [
-                {
-                    "localRoot": "${workspaceFolder}",
-                    "remoteRoot": "."
-                }
-            ],
-            "justMyCode": true
+          "localRoot": "${workspaceFolder}",
+          // 「.」は、リモート側アプリの作業ディレクトリを意味する
+          "remoteRoot": "."
         }
-    ]
+      ],
+      "justMyCode": true
+    }
+  ]
 }
